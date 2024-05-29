@@ -43,7 +43,7 @@
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+  <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
       <a class="nav-link px-3" href="#">Sign out</a>
@@ -125,7 +125,7 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">List Saham</h1>
+        <h1 class="h2">Harga Saham hari ini</h1>
       </div>
 
       <script src="{{ url_for('static', filename='bootstrap-5.1.3/dist/js/bootstrap.bundle.min.js') }}"></script>
@@ -133,12 +133,11 @@
 
       <h2>Saham US</h2>
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm" id="tableUS">
           <thead>
             <tr>
               <th scope="col">No</th>
-              <th scope="col">Name</th>
-              <th scope="col">Emiten Name</th>
+              <th scope="col">Emiten</th>
               <th scope="col">Close</th>
               <th scope="col">Volume</th>
             </tr>
@@ -149,12 +148,11 @@
       </div>
       <h2>Saham ID</h2>
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm" id="tableID">
           <thead>
             <tr>
               <th scope="col">No</th>
-              <th scope="col">Name</th>
-              <th scope="col">Emiten Name</th>
+              <th scope="col">Emiten</th>
               <th scope="col">Close</th>
               <th scope="col">Volume</th>
             </tr>
@@ -169,8 +167,7 @@
 
 
     <script src="bootstrap-5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js"></script><script src="{{ url_for('static', filename='dashboard.js') }}"></script>
-      <script src="{{ url_for('static', filename='table.js') }}"></script>
+      <script src="{{ url_for('static', filename='stocktable.js') }}"></script>
   </body>
 </html>
