@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 app = Flask(__name__)
 
 # Download data once and store it in a global DataFrame
-ticker = 'BBCA.JK'
+x = 'BBCA.JK'
 end_date = datetime.now()
 start_date = end_date - timedelta(days=365)
 start_date1 = end_date - timedelta(days=30)
@@ -17,9 +17,16 @@ indonesian_stocks = [
     "PGAS.JK", "PTBA.JK", "SMGR.JK", "UNVR.JK", "WIKA.JK"
 ]
 
+us_stocks = [
+    "AAPL", "ABBV", "AMZN", "BAC",
+    "BA", "COST", "CMCSA", "COP",
+    "CVX", "DIS", "DUK", "EXC", "GOOGL",
+    "GS", "HD", "HON", "JNJ", "JPM"
+]
+
 # Global DataFrame to store stock data
-stock_data = yf.download(ticker, start=start_date, end=end_date)
-stock_data1 = yf.download(ticker, start=start_date1, end=end_date)
+stock_data = yf.download(x, start=start_date, end=end_date)
+stock_data1 = yf.download(x, start=start_date1, end=end_date)
 
 @app.route('/', methods=["POST", "GET"])
 def home():
@@ -31,10 +38,10 @@ def home():
 
         global end_date, start_date
         end_date = datetime.now()
-        if selected_time == '1d':
-            start_date = end_date - timedelta(days=1)
-        elif selected_time == '5d':
-            start_date = end_date - timedelta(days=5)
+        if selected_time == '3d':
+            start_date = end_date - timedelta(days=3)
+        elif selected_time == '7d':
+            start_date = end_date - timedelta(days=7)
         elif selected_time == '1mo':
             start_date = end_date - timedelta(days=30)
         elif selected_time == '3mo':
@@ -50,7 +57,7 @@ def home():
 
         global stock_data, stock_data1
         stock_data = yf.download(x, start=start_date, end=end_date)
-        stock_data1 = yf.download(x, start=start_date, end=end_date)
+        # stock_data1 = yf.download(x, start=start_date, end=end_date)
         return redirect(url_for("home"))
     else:
         selected_ticker = request.args.get('selected_ticker')
@@ -61,8 +68,7 @@ def ai():
     predictions = []
     actual_values = []
     if request.method == "POST":
-        global x
-        x = request.form["emtn"]
+        x = request.form["emtn2"]
         print(x)
         start_date = "2020-01-01"
         end_date = "2021-01-01"
@@ -72,12 +78,44 @@ def ai():
 
 @app.route('/stock')
 def stock():
-    return render_template('List-Stock.html')
+    return render_template('List-Stock.html', indonesian_stocks=indonesian_stocks, us_stocks=us_stocks)
+
+@app.route('/stockdata')
+def stock_data():
+    data_indo = []
+    data_us = []
+
+    for emiten in indonesian_stocks:
+        stock = yf.Ticker(emiten)
+        hist = stock.history(period="1d")
+        if not hist.empty:
+            close_price = int(hist['Close'].iloc[0])  
+            volume = int(hist['Volume'].iloc[0])     
+            data_indo.append({
+                "emiten": emiten,
+                "close": close_price,
+                "volume": volume
+            })
+
+    for emiten in us_stocks:
+        stock = yf.Ticker(emiten)
+        hist = stock.history(period="1d")
+        if not hist.empty:
+            close_price = int(hist['Close'].iloc[0])  
+            volume = int(hist['Volume'].iloc[0])     
+            data_us.append({
+                "emiten": emiten,
+                "close": close_price,
+                "volume": volume
+            })
+
+    return jsonify(data_indo, data_us)
 
 
 @app.route('/data')
 def get_data():
     data = {
+        'emiten' : x,
         'dates': stock_data.index.strftime('%Y-%m-%d').tolist(),
         'open': stock_data['Open'].tolist(),
         'high': stock_data['High'].tolist(),
@@ -98,7 +136,7 @@ def data1():
     end_date = datetime.strptime(end_date_str, '%Y-%m-%d')
     
     # Filter data within the date range
-    filtered_data = stock_data1.loc[start_date:end_date]
+    filtered_data = stock_data.loc[start_date:end_date]
     
     # Format data untuk dikirim sebagai JSON
     data = {
@@ -108,7 +146,6 @@ def data1():
     }
     
     return jsonify(data)
-
 
 
 if __name__ == '__main__':
