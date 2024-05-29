@@ -57,7 +57,7 @@ def home():
 
         global stock_data, stock_data1
         stock_data = yf.download(x, start=start_date, end=end_date)
-        # stock_data1 = yf.download(x, start=start_date, end=end_date)
+        stock_data1 = yf.download(x, start=start_date, end=end_date)
         return redirect(url_for("home"))
     else:
         selected_ticker = request.args.get('selected_ticker')
@@ -68,7 +68,7 @@ def ai():
     predictions = []
     actual_values = []
     if request.method == "POST":
-        x = request.form["emtn2"]
+        x = request.form["emtn"]
         print(x)
         start_date = "2020-01-01"
         end_date = "2021-01-01"
@@ -136,7 +136,7 @@ def data1():
     end_date = datetime.strptime(end_date_str, '%Y-%m-%d')
     
     # Filter data within the date range
-    filtered_data = stock_data.loc[start_date:end_date]
+    filtered_data = stock_data1.loc[start_date:end_date]
     
     # Format data untuk dikirim sebagai JSON
     data = {
