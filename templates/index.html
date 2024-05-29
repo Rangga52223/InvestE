@@ -144,10 +144,13 @@
             </select>
             <br>
             <select class="form-select" name="time" id="time">
-              <option value="1d">1 Hari</option>
-              <option value="5d">5 Hari</option>
+              <option value="3d">3 Hari</option>
+              <option value="7d">7 Hari</option>
               <option value="1mo">1 Bulan</option>
               <option value="3mo">3 Bulan</option>
+              <option value="6mo">6 Bulan</option>
+              <option value="1y">1 Tahun</option>
+              <option value="5y">5 Tahun</option>
             </select>         
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
@@ -157,9 +160,9 @@
       <script src="{{ url_for('static', filename='bootstrap-5.1.3/dist/js/bootstrap.bundle.min.js') }}"></script>
 
 
-      <h2>Detail Saham</h2>
+      <h2 id="stockHeading"></h2>
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
+        <table id="stockTable" class="table table-striped table-sm">
           <thead>
             <tr>
               <th scope="col">Date</th>
