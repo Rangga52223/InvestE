@@ -10,6 +10,7 @@ Aplikasi Berbasis Web untuk memprediksi nilai close harga saham
 ## Authors
 
 * **Rangga Wahyu Nugroho** - *Pokok Nya Ngerjain* - [Rangga52223](wkwkwk)
+* **Farid Wiyata Hanif** - *Bagian ML-ers (Bukan Mobel Lejen soalnya gw jelek di game kompe, gw pake LSTM juga)*
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
