@@ -74,6 +74,25 @@ def prediksi(ticker, start_date, end_date, pred_days=7):
     accuracy = (1 - relative_error) * 100
     predictions = prediksi_berulang(model, X_test, n_steps, pred_days, sc)
     return predictions, rmse, accuracy
+    
+
+#Save Model
+    lstm.save('lstm_model.h5')
+
+#Save model training history
+    history_df = pd.DataFrame(history.history)
+    history_df.to_csv('training_history.csv', index = False)
+
+    print("Model and training history saved succesfully.")
+
+# Load the model
+    loaded_model = load_model('lstm_model.h5')
+
+#Read training history
+    history_df = pd.read_csv('training_history.csv')
+    print(history_df.head())
+
+
 
 # Contoh penggunaan
 #ticker = 'AAPL'
