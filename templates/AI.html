@@ -125,87 +125,77 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Prediksi Saham</h1>
-        <!-- <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-          </div>
-          
-        </div> -->
-      </div>
-
-      <form id="tickerSelect" action="/yoi" method="post">
-        <legend>Pilih Emiten Saham</legend>
-        <div class="mb-3">
-            <select class="form-select" name="emtn" id="emtn">
-                {% for stock in indonesian_stocks %}
-                    <option value="{{ stock }}" {% if selected_ticker == stock %}selected{% endif %}>{{ stock }}</option>
-                {% endfor %}
+            <select id="tickerSelect" onchange="fetchPredictions()" class="form-select form-select-sm" aria-label=".form-select-sm example">
+              {% for IDStock in IDstocks %}
+              <option value="{{IDStock}}">{{IDStock}}</option>
+              {% endfor %}
             </select>
-        </div>
-        <div class="mb-3">
-            <label for="start_date">Start Date:</label>
-            <input type="date" id="start_date" name="start_date" required>
-        </div>
-        <div class="mb-3">
-            <label for="end_date">End Date:</label>
-            <input type="date" id="end_date" name="end_date" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+          </div>
+      </div>
+      </div>
+    
     
     <canvas id="predictionChart" width="400" height="200"></canvas>
     
-    {% if predictions %}
     <script>
-        const predictions = {{ predictions | tojson }};
-        const ctx = document.getElementById('predictionChart').getContext('2d');
-        const labels = Array.from({length: predictions.length}, (_, i) => {
-            const date = new Date();
-            date.setDate(date.getDate() + i);
-            return date.toISOString().split('T')[0];
-        });
-        const chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Predicted Stock Price (USD)',
-                    data: predictions,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 2,
-                    pointBackgroundColor: 'rgba(75, 192, 192, 1)',
-                    fill: false
-                }]
-            },
-            options: {
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Date'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Price (USD)'
-                        }
-                    }
-                },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return `Price: $${context.raw}`;
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    </script>
-    {% endif %}
+      function fetchPredictions() {
+          const ticker = document.getElementById('tickerSelect').value;
+          fetch(`/predict?ticker=${ticker}`)
+              .then(response => response.json())
+              .then(data => {
+                  const ctx = document.getElementById('predictionChart').getContext('2d');
+                  const labels = Array.from({length: data.predictions.length}, (_, i) => {
+                      const date = new Date();
+                      date.setDate(date.getDate() + i);
+                      return date.toISOString().split('T')[0];
+                  });
+                  const chart = new Chart(ctx, {
+                      type: 'line',
+                      data: {
+                          labels: labels,
+                          datasets: [{
+                              label: `Predicted Stock Price for ${ticker} (USD)`,
+                              data: data.predictions,
+                              borderColor: 'rgba(75, 192, 192, 1)',
+                              borderWidth: 2,
+                              pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                              fill: false
+                          }]
+                      },
+                      options: {
+                          scales: {
+                              x: {
+                                  title: {
+                                      display: true,
+                                      text: 'Date'
+                                  }
+                              },
+                              y: {
+                                  title: {
+                                      display: true,
+                                      text: 'Price (USD)'
+                                  }
+                              }
+                          },
+                          plugins: {
+                              tooltip: {
+                                  callbacks: {
+                                      label: function(context) {
+                                          return `Price: $${context.raw}`;
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  });
+              });
+      }
+      
+      // Fetch predictions for the default ticker on page load
+      window.onload = fetchPredictions;
+  </script>
       <!--<script src="{{ url_for('static', filename='bootstrap-5.1.3/dist/js/bootstrap.bundle.min.js') }}"></script> -->
 
 
@@ -234,6 +224,7 @@
     <script src="bootstrap-5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js"></script><script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='ai.js') }}"></script>
       <script src="{{ url_for('static', filename='table.js') }}"></script>
       <script>
         window.watsonAssistantChatOptions = {

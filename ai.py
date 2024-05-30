@@ -6,6 +6,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error
+from tensorflow.keras.models import load_model
 
 def proses_data(ticker, start_date, end_date):
     stock_data = yf.download(ticker, start=start_date, end=end_date)
