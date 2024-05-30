@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for
 import yfinance as yf
 import pandas as pd
 from datetime import datetime, timedelta
+import ai as prediksi
 
 app = Flask(__name__)
 
@@ -63,7 +64,7 @@ def home():
         selected_ticker = request.args.get('selected_ticker')
         return render_template('index.html', watchlist=selected_ticker, indonesian_stocks=indonesian_stocks)
 
-@app.route('/ai', methods=["POST", "GET"])
+#@app.route('/ai', methods=["POST", "GET"])
 def ai():
     predictions = []
     actual_values = []
@@ -124,6 +125,19 @@ def get_data():
         'volume': stock_data['Volume'].tolist()
     }
     return jsonify(data)
+
+@app.route('/ai', methods=['GET', 'POST'])
+def yoi():
+    selected_ticker = request.form.get('emtn', 'AAPL')
+    predictions, rmse, accuracy = None, None, None
+    
+    if request.method == 'POST':
+        start_date = request.form['start_date']
+        end_date = request.form['end_date']
+        pred_days = 7
+        predictions, rmse, accuracy = prediksi.prediksi(selected_ticker, start_date, end_date, pred_days)
+
+    return render_template('AI.html', indonesian_stocks=indonesian_stocks, selected_ticker=selected_ticker, predictions=predictions, rmse=rmse, accuracy=accuracy)
 
 @app.route('/getdata')
 def data1():

@@ -1,9 +1,11 @@
+# prediction_module.py
 import yfinance as yf
 import pandas as pd
 import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM
 from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import mean_squared_error
 
 def proses_data(ticker, start_date, end_date):
     stock_data = yf.download(ticker, start=start_date, end=end_date)
@@ -55,20 +57,35 @@ def prediksi_berulang(model, X_test, n_steps, pred_days, sc):
     predictions = np.round(predictions, 2)
     return predictions.tolist()
 
-def prediksi(ticker, start_date, end_date, pred_days=5):
+def hitung_rmse(model, X_test, y_test):
+    y_pred = model.predict(X_test)
+    mse = mean_squared_error(y_test, y_pred)
+    rmse = np.sqrt(mse)
+    return rmse, y_test
+
+def prediksi(ticker, start_date, end_date, pred_days=7):
     X_ft, target_y, sc = proses_data(ticker, start_date, end_date)
     X_train, X_test, y_train, y_test, n_steps = data_latih(X_ft, target_y)
     model = lstm(X_train, y_train, n_steps)
+    rmse, y_test = hitung_rmse(model, X_test, y_test)
+    mean_actual_prices = np.mean(y_test)
+    relative_error = rmse / mean_actual_prices
+    accuracy = (1 - relative_error) * 100
     predictions = prediksi_berulang(model, X_test, n_steps, pred_days, sc)
-    return predictions
+    return predictions, rmse, accuracy
 
 # Contoh penggunaan
-ticker = 'AAPL'
-start_date = '2020-01-01'
-end_date = '2023-01-01'
-pred_days = 5
-predictions = prediksi(ticker, start_date, end_date, pred_days)
-print(f'Prediksi harga saham untuk {pred_days} hari ke depan dalam USD: {predictions}')
+#ticker = 'AAPL'
+#start_date = '2018-01-01'
+#end_date = '2024-05-30'
+#pred_days = 7
+#predictions, rmse, accuracy = prediksi(ticker, start_date, end_date, pred_days)
+#print(f'Prediksi harga saham untuk {pred_days} hari ke depan dalam USD: {predictions}')
+#print(f'Root Mean Squared Error (RMSE) pada data uji: {rmse}')
+#print(f'Akurasi: {accuracy:.2f}%')
+
+
+
 
 
 # if __name__ == "__main__":
