@@ -104,3 +104,11 @@ body {
 #stockTable {
   display: none; /* Hide the table initially */
 }
+
+.spinner-border{
+  justify-content: center;
+  align-self: center;
+  z-index: 1;
+  width: 3rem;
+  height: 3rem;
+}

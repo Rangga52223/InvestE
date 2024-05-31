@@ -1,4 +1,5 @@
 let chart = null;
+spinner.style.display = 'none'; 
 
 function fetchPredictions() {
     const ticker = document.getElementById('tickerSelect').value;
@@ -57,11 +58,19 @@ function fetchPredictions() {
                     }
                 }
             });
+            spinner.style.display = 'none'; 
+
         });
+
+        var spinner = document.getElementById('spinner');
+        spinner.style.display = 'block'; // Show the spinner
+        chart = null
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchPredictions();
             document.getElementById('tickerSelect').addEventListener('change', fetchPredictions);
         });
+
+
 }
 
