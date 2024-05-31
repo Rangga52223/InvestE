@@ -3,6 +3,7 @@ import yfinance as yf
 import pandas as pd
 from datetime import datetime, timedelta
 import ai as prediksi
+import ai2 as predi
 
 app = Flask(__name__)
 
@@ -120,11 +121,11 @@ def index():
 
 @app.route('/predict')
 def predict():
-    ticker = request.args.get('ticker', default='AAPL', type=str)
+    ticker = request.args.get('ticker', default='BBCA.jk', type=str)
     start_date = '2018-01-01'
     end_date = str(datetime.now().date())
     pred_days = 7
-    predictions, rmse, accuracy = prediksi.prediksi(ticker, start_date, end_date, pred_days)
+    predictions, rmse, accuracy = predi.prediksi(ticker, start_date, end_date, pred_days)
     return jsonify(predictions=predictions, rmse=rmse, accuracy=accuracy)
 
 @app.route('/getdata')
