@@ -65,6 +65,9 @@ def home():
         selected_ticker = request.args.get('selected_ticker')
         return render_template('index.html', watchlist=selected_ticker, indonesian_stocks=indonesian_stocks)
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 @app.route('/stock')
 def stock():

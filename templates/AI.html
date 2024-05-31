@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>AI Invest.in</title>
+    <title>AI InvestE</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
 
@@ -128,6 +128,7 @@
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <select id="tickerSelect" onchange="fetchPredictions()" class="form-select form-select-sm" aria-label=".form-select-sm example">
+              <option>--Pilih Saham--</option>
               {% for IDStock in IDstocks %}
               <option value="{{IDStock}}">{{IDStock}}</option>
               {% endfor %}
@@ -136,14 +137,14 @@
       </div>
       </div>
     
-    <div class="d-flex justify-content-center">
+    <!-- <div class="d-flex justify-content-center">
       <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
-    </div>
+    </div> -->
     <canvas id="predictionChart" width="400" height="200"></canvas>
     
-    <script>
+    <!-- <script>
       function fetchPredictions() {
           const ticker = document.getElementById('tickerSelect').value;
           fetch(`/predict?ticker=${ticker}`)
@@ -195,10 +196,10 @@
                       }
                   });
               });
-      }
+      } -->
       
-      // Fetch predictions for the default ticker on page load
-      window.onload = fetchPredictions;
+      <!-- // Fetch predictions for the default ticker on page load
+      window.onload = fetchPredictions; -->
   </script>
       <!--<script src="{{ url_for('static', filename='bootstrap-5.1.3/dist/js/bootstrap.bundle.min.js') }}"></script> -->
 

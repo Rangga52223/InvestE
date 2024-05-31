@@ -1,3 +1,5 @@
+let chart = null;
+
 function fetchPredictions() {
     const ticker = document.getElementById('tickerSelect').value;
     fetch(`/predict?ticker=${ticker}`)
@@ -9,12 +11,19 @@ function fetchPredictions() {
                 date.setDate(date.getDate() + i);
                 return date.toISOString().split('T')[0];
             });
-            const chart = new Chart(ctx, {
+            
+            // Hapus chart sebelumnya
+            if (chart) {
+                chart.destroy();
+            }
+
+            // Create a new chart instance
+            chart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: `Predicted Stock Price for ${ticker} (USD)`,
+                        label: `Predicted Stock Price for ${ticker} (Rp.)`,
                         data: data.predictions,
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 2,
@@ -33,7 +42,7 @@ function fetchPredictions() {
                         y: {
                             title: {
                                 display: true,
-                                text: 'Price (USD)'
+                                text: 'Price (Rp.)'
                             }
                         }
                     },
@@ -49,7 +58,10 @@ function fetchPredictions() {
                 }
             });
         });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchPredictions();
+            document.getElementById('tickerSelect').addEventListener('change', fetchPredictions);
+        });
 }
 
-// Fetch predictions for the default ticker on page load
-window.onload = fetchPredictions;
