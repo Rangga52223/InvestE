@@ -1,97 +1,50 @@
-/* globals Chart:false, feather:false */
-
 (function () {
-  'use strict';
+  'use strict'
 
-  feather.replace({ 'aria-hidden': 'true' });
+  feather.replace({ 'aria-hidden': 'true' })
 
-  // ngambil data dari endpoint api nya flask
-  function fetchData(startDate, endDate) {    
-    fetch(`/getdata?start_date=${startDate}&end_date=${endDate}`)// ini endpoit nya kayak rule nya ngambil disini
-      .then(response => response.json())
-      .then(data => {
-        if (data.error) {
-          console.error(data.error);
-          return;
-        }
+  // Fetch data from the /data endpoint
+  fetch('/data')
+    .then(response => response.json())
+    .then(data => {
+      if (data.error) {
+        console.error(data.error);
+        return;
+      }
 
-        // Log data to console for debugging
-        console.log(data);
+      // Log data to console for debugging
+      console.log(data);
 
-        // buat chart nya
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: data.dates,
-            datasets: [{
-              label: data.emiten,
-              data: data.close,  // Use 'close' from the response
-              lineTension: 0,
-              backgroundColor: 'transparent',
-              borderColor: '#007bff',
-              borderWidth: 4,
-              pointBackgroundColor: '#007bff'
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: false
-              }
-            },
-            plugins: {
-              legend: {
-                display: true
-              }
-            }
-          }
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
+      // Get the table body element
+      var tableBody = document.getElementById('tableBody');
+
+      // Initialize an empty HTML string
+      let tableContent = '';
+      const firstDate = data.dates[0];
+      const lastDate = data.dates[data.dates.length - 1];
+
+      // Populate the table with data
+      data.dates.forEach((date, index) => {
+        tableContent += `
+        <tr>
+          <td>${date}</td>
+          <td>${data.open[index]}</td>
+          <td>${data.high[index]}</td>
+          <td>${data.close[index]}</td>
+          <td>${data.volume[index]}</td>
+        </tr>
+        `;
       });
-  }
 
-  // Buat nampilin 30hari gess
-  function calculateDateRange() {
-    var endDate = new Date();
-    var startDate = new Date();
-    startDate.setDate(endDate.getDate() - 1825);
+      // Show the table after data is processed
+      document.getElementById('stockTable').style.display = 'table';
 
-    return {
-      startDate: startDate.toISOString().split('T')[0],
-      endDate: endDate.toISOString().split('T')[0]
-    };
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    const emtnSelect = document.getElementById('emtn');
-    const timeSelect = document.getElementById('time');
-    
-    // Retrieve the selected option from localStorage
-    const savedEmtn = localStorage.getItem('selectedEmtn');
-    const savedTime = localStorage.getItem('selectedTime');
-    
-    if (savedEmtn) {
-        emtnSelect.value = savedEmtn;
-    }
-
-    if (savedTime) {
-      timeSelect.value = savedTime;
-  }
-
-    // Save the selected option to localStorage when the form is submitted
-    document.getElementById('stockForm').addEventListener('submit', function () {
-        const selectedEmtn = emtnSelect.value;
-        const selectedTime = timeSelect.value;
-        localStorage.setItem('selectedEmtn', selectedEmtn);
-        localStorage.setItem('selectedTime', selectedTime);
+      // Set the innerHTML of the table body to the constructed HTML string
+      tableBody.innerHTML = tableContent;
+      stockHeading.innerHTML = `Detail Saham (${firstDate} s.d. ${lastDate})`;
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
     });
-  });
 
-
-  // Fetch initial data for the last 30 days
-  var dateRange = calculateDateRange();
-  fetchData(dateRange.startDate, dateRange.endDate);
 })();

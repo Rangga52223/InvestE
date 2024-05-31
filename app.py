@@ -42,8 +42,8 @@ def home():
         end_date = datetime.now()
         if selected_time == '3d':
             start_date = end_date - timedelta(days=3)
-        elif selected_time == '7d':
-            start_date = end_date - timedelta(days=7)
+        elif selected_time == '5d':
+            start_date = end_date - timedelta(days=5)
         elif selected_time == '1mo':
             start_date = end_date - timedelta(days=30)
         elif selected_time == '3mo':
@@ -55,11 +55,11 @@ def home():
         elif selected_time == '5y':
             start_date = end_date - timedelta(days=1825)
         else:
-            start_date = None  # Use all available data
+            start_date = None  
 
         global stock_data, stock_data1
         stock_data = yf.download(x, start=start_date, end=end_date)
-        stock_data1 = yf.download(x, start=start_date, end=end_date)
+        # stock_data1 = yf.download(x, start=start_date, end=end_date)
         return redirect(url_for("home"))
     else:
         selected_ticker = request.args.get('selected_ticker')
@@ -121,7 +121,7 @@ def index():
 
 @app.route('/predict')
 def predict():
-    ticker = request.args.get('ticker', default='BBCA.jk', type=str)
+    ticker = request.args.get('ticker', default='BBCA.Jk', type=str)
     start_date = '2018-01-01'
     end_date = str(datetime.now().date())
     pred_days = 7
@@ -139,7 +139,7 @@ def data1():
     end_date = datetime.strptime(end_date_str, '%Y-%m-%d')
     
     # Filter data within the date range
-    filtered_data = stock_data1.loc[start_date:end_date]
+    filtered_data = stock_data.loc[start_date:end_date]
     
     # Format data untuk dikirim sebagai JSON
     data = {
