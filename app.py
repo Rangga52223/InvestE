@@ -69,6 +69,10 @@ def home():
 def login():
     return render_template('login.html')
 
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
 @app.route('/stock')
 def stock():
     return render_template('List-Stock.html', indonesian_stocks=indonesian_stocks, us_stocks=us_stocks)

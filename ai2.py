@@ -70,7 +70,7 @@ def hitung_rmse(model, X_test, y_test):
     return rmse, y_test
 
 def prediksi(ticker, start_date, end_date, pred_days=7):
-    model_dir = r'C:\Users\Hanna Nathania\Downloads\InvestE2\InvestE\model'
+    model_dir = r'/InvestE/model'
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)
     model_path = os.path.join(model_dir, f"{ticker}.h5")
