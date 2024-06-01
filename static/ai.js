@@ -51,23 +51,26 @@ function fetchPredictions() {
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return `Price: $${context.raw}`;
+                                    return `Price: Rp.${context.raw}`;
                                 }
                             }
                         }
                     }
                 }
             });
+            predictionChart.style.display ='block';
             spinner.style.display = 'none'; 
 
         });
 
         var spinner = document.getElementById('spinner');
+        var predictionChart = document.getElementById('predictionChart');
         spinner.style.display = 'block'; // Show the spinner
-        chart = null
+        predictionChart.style.display ='none';
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchPredictions();
+            spinner.style.display = 'none'; 
             document.getElementById('tickerSelect').addEventListener('change', fetchPredictions);
         });
 

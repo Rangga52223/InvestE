@@ -75,7 +75,8 @@ def register():
 
 @app.route('/stock')
 def stock():
-    return render_template('List-Stock.html', indonesian_stocks=indonesian_stocks, us_stocks=us_stocks)
+    date = end_date.strftime('%d-%m-%Y')
+    return render_template('List-Stock.html', indonesian_stocks=indonesian_stocks, us_stocks=us_stocks, end_date=date)
 
 @app.route('/stockdata')
 def stock_data():
@@ -89,6 +90,7 @@ def stock_data():
             close_price = int(hist['Close'].iloc[0])  
             volume = int(hist['Volume'].iloc[0])     
             data_indo.append({
+                "dates": hist.index.strftime('%Y-%m-%d').tolist(),
                 "emiten": emiten,
                 "close": close_price,
                 "volume": volume
@@ -101,6 +103,7 @@ def stock_data():
             close_price = int(hist['Close'].iloc[0])  
             volume = int(hist['Volume'].iloc[0])     
             data_us.append({
+                "dates": hist.index.strftime('%Y-%m-%d').tolist(),
                 "emiten": emiten,
                 "close": close_price,
                 "volume": volume
