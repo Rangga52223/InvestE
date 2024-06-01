@@ -220,14 +220,9 @@ def proses_register():
 @talisman(content_security_policy=None)  # Exempt Talisman for this route
 @csrf.exempt  # Exempt CSRF token for this route
 def stock():
-<<<<<<< HEAD
     if 'loggedin' in session:
         return render_template('List-Stock.html', indonesian_stocks=indonesian_stocks, us_stocks=us_stocks)
     return redirect(url_for('login'))
-=======
-    date = end_date.strftime('%d-%m-%Y')
-    return render_template('List-Stock.html', indonesian_stocks=indonesian_stocks, us_stocks=us_stocks, end_date=date)
->>>>>>> 2c4cbbad79632224274c33848c69be2a8a40d39d
 
 @app.route('/stockdata')
 @talisman(content_security_policy=None)  # Exempt Talisman for this route
@@ -237,7 +232,6 @@ def stock_data():
         data_indo = []
         data_us = []
 
-<<<<<<< HEAD
         for emiten in indonesian_stocks:
             stock = yf.Ticker(emiten)
             hist = stock.history(period="1d")
@@ -261,35 +255,6 @@ def stock_data():
                     "close": close_price,
                     "volume": volume
                 })
-=======
-    for emiten in indonesian_stocks:
-        stock = yf.Ticker(emiten)
-        hist = stock.history(period="1d")
-        if not hist.empty:
-            close_price = int(hist['Close'].iloc[0])  
-            volume = int(hist['Volume'].iloc[0])     
-            data_indo.append({
-                "dates": hist.index.strftime('%Y-%m-%d').tolist(),
-                "emiten": emiten,
-                "close": close_price,
-                "volume": volume
-            })
-
-    for emiten in us_stocks:
-        stock = yf.Ticker(emiten)
-        hist = stock.history(period="1d")
-        if not hist.empty:
-            close_price = int(hist['Close'].iloc[0])  
-            volume = int(hist['Volume'].iloc[0])     
-            data_us.append({
-                "dates": hist.index.strftime('%Y-%m-%d').tolist(),
-                "emiten": emiten,
-                "close": close_price,
-                "volume": volume
-            })
-
-    return jsonify(data_indo, data_us)
->>>>>>> 2c4cbbad79632224274c33848c69be2a8a40d39d
 
         return jsonify(data_indo, data_us)
     return redirect(url_for('login'))
