@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
     <title>Dashboard Saham</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
@@ -125,39 +123,39 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Harga Saham hari ini</h1>
+        <h1 class="h2">Update Saham Terkini</h1>
       </div>
 
       <script src="{{ url_for('static', filename='bootstrap-5.1.3/dist/js/bootstrap.bundle.min.js') }}"></script>
 
 
-      <h2>Saham US</h2>
+      <h2>Emiten Saham Indonesia</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm" id="tableUS">
           <thead>
             <tr>
-              <th scope="col">No</th>
-              <th scope="col">Emiten</th>
-              <th scope="col">Close</th>
-              <th scope="col">Volume</th>
-            </tr>
-          </thead>
-          <tbody id="Us">  
-          </tbody>
-        </table>
-      </div>
-      <h2>Saham ID</h2>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm" id="tableID">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
+              <th scope="col">Date</th>
               <th scope="col">Emiten</th>
               <th scope="col">Close</th>
               <th scope="col">Volume</th>
             </tr>
           </thead>
           <tbody id="Indo">  
+          </tbody>
+        </table>
+      </div>
+      <h2>Emiten Saham Amerika Serikat</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm" id="tableID">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Emiten</th>
+              <th scope="col">Close</th>
+              <th scope="col">Volume</th>
+            </tr>
+          </thead>
+          <tbody id="Us">  
           </tbody>
         </table>
       </div>

@@ -25,7 +25,7 @@
         data_indo.forEach((stock, index) => {
             tableContentIndo += `
             <tr>
-                <td>${index + 1}</td>
+                <td>${stock.dates}</td>
                 <td>${stock.emiten}</td>
                 <td>${stock.close}</td>
                 <td>${stock.volume}</td>
@@ -36,7 +36,7 @@
         data_us.forEach((stock, index) => {
             tableContentUs += `
             <tr>
-                <td>${index + 1}</td>
+            <td>${stock.dates}</td>
                 <td>${stock.emiten}</td>
                 <td>${stock.close}</td>
                 <td>${stock.volume}</td>

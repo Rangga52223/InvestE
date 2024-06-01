@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Product example · Bootstrap v5.1</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/product/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="{{ url_for('static', filename='bootstrap-5.1.3/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+  </head>
+  <body style="background-color: rgb(224, 224, 224);">
+    
+<header class="site-header sticky-top py-1" style="background-color: rgb(243, 243, 243);" >
+  <nav class="container d-flex flex-column flex-md-row justify-content-between">
+    <a class="navbar-brand" href="#">
+        <img src="{{ url_for('static', filename='logo.png') }}" height="40">
+    </a>
+    <div>
+    <a class="btn " style="background-color: rgb(202, 186, 95); color: antiquewhite;height: 40px;" href="/login" role="button">Login</a>
+    <a class="btn " style="background-color: rgb(68, 68, 68); color: antiquewhite;" href="/register" role="button">Register</a>
+    </div>  
+      
+  </nav>
+</header>
+
+
+  
+</div>
+<div style="background-image: url({{ url_for('static', filename='2.jpg') }});background-size: cover;height: 400px;">
+    <div class=" text-start container " style="background-color: rgba(48, 48, 48, 0.527); height: 400px;">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto ">
+            <p></p>
+            <p></p>
+            <h1 class="fw-light" style="color: aliceblue;">Selamat Datang Di Invest E</h1>
+            <p class="lead " style="color: aliceblue;">Prediksi saham kamu dengan AI.</p>
+            
+          </div>
+        </div>
+      </div>
+</div>
+<div style="background-color: rgb(209, 209, 209); height: 400px;">
+    <div class=" text-start container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Apa Itu Invest-E</h1>
+            <p class="lead text-muted">Invest-E merupakan aplikasi berbasis web untuk melihat prediksi saham dari AI, Invest-E juga bisa sebagai handbook kamu untuk melihat pasar saham terkini.</p>
+          </div>
+        </div>
+      </div>
+</div>
+<div style="background-image: url({{ url_for('static', filename='1.jpg') }});background-size: cover;height: 400px;">
+    <div class=" text-start container" style="background-color: rgba(48, 48, 48, 0.527); height: 400px;">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light" style="color: aliceblue;">Keuntungan menggunakan Invest-E</h1>
+            <ol class="list-group-numbered" style="color: aliceblue;">
+                <li >Dapat melihat prediksi 1 minggu kedepan</li>
+                <li >Terdapat graphic untuk melihat saham ataupun prediksi</li>
+                <li >Hasil prediski selalu di load dalam 1 hari</li>
+              </ol>
+          </div>
+        </div>
+      </div>
+</div>
+<div style="background-color: rgb(209, 209, 209); height: 300px;">
+    <div class=" text-start container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Itulah Invest-E</h1>
+            <p class="lead text-muted">Tunggu apalagi untuk bisa menggunakan AI untuk prediksi saham dan gratis, hanya di Invest-E, jika kamu tertarik silahakan <a href="/login">login</a> jika belum punya akun silahkan <a href="/register">daftar</a></p>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+<footer class="text-muted py-5">
+    <div class="container">
+      <p class="mb-1">Ini merupakan dari project capstone Skillvull IBM MSIB Batch 6 Tim-16, dan ini merupakan versi pre-Alpha 0.0.1 (masih terdapat bug)</p>
+      <p class="mb-0">Jika kamu tertarik dari tim pembuat aplikasi ini silahkan <a href="/https://github.com/Rangga52223/InvestE">github kami</a> terimaksih sudah mecoba aplikasi ini, kami menghargai dan meangapresiasi nya, jika terdapat masalah bisa menghubungi kami di github account kami. <a href="#">Back to top</a></p>
+    </div>
+  </footer>
+
+
+    <script src="{{ url_for('static', filename='bootstrap-5.1.3/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+      
+  </body>
+</html>
