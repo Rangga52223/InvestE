@@ -31,14 +31,15 @@
 
 </head>
 <body>
-	
+
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
 				
 					<div class="login-header">
-						Login to InvestE
+						Masuk ke InvestE
 					</div>
+<<<<<<< HEAD
 					<form method="post" action="{{ url_for('login') }}" class="needs-validation" novalidate>
 						{{ form.csrf_token }}
 						<div class="form-group">
@@ -59,6 +60,66 @@
 					</form>
 					<a href="/register">sign up</a>
 					
+=======
+					
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input-email" type="text" name="email" placeholder="E-mail">
+						<span class="focus-input100"></span>
+					</div>
+					
+					
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input-password" type="password" name="pass" placeholder="Password">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="forgot_pass">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<label class="label-checkbox100" for="ckb1">
+								Ingat saya
+							</label>
+						</div>
+
+						<div>
+							<a href="#" class="txt1">
+								Lupa Password?
+							</a>
+						</div>
+					</div>
+			
+
+					<div class="container-login100-form-btn">
+						<button class="login-btn">
+							Masuk
+						</button>
+					</div>
+
+					<div class="text-center p-t-46 p-b-20">
+						<span class="txt2">
+							Belum punya akun?
+						</span>
+						<br>
+						<a href="#" class="txt1">
+							Daftar di sini!
+						</a>
+					</div>
+
+					<div>
+
+					</div>
+
+					<!-- <div class="login100-form-social flex-c-m">
+						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
+							<i class="fa fa-facebook-f" aria-hidden="true"></i>
+						</a>
+
+						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
+							<i class="fa fa-twitter" aria-hidden="true"></i>
+						</a>
+					</div> -->
+				</form>
+>>>>>>> 2c4cbbad79632224274c33848c69be2a8a40d39d
 
 				<!-- <div class="login100-more" style="background-image: url('images/bg-01.jpg'{{ url_for('static', filename='images/bg-01.jpg') }});"> -->
 				</div>
