@@ -98,7 +98,7 @@ stock_data1 = yf.download(x, start=start_date1, end=end_date)
 
 # Configure logging
 @app.route('/')
-@talisman(content_security_policy=None)  # Exempt Talisman for this route
+# Exempt Talisman for this route
 @csrf.exempt
 def intro():
     return render_template('landing-page.html')
