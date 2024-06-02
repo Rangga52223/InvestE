@@ -222,8 +222,9 @@ def proses_register():
 @csrf.exempt  # Exempt CSRF token for this route
 def stock():
     if 'loggedin' in session:
+        dates = end_date.index.strftime('%Y-%m-%d')
         username = session['username']
-        return render_template('List-Stock.html', indonesian_stocks=indonesian_stocks, us_stocks=us_stocks, username=username)
+        return render_template('List-Stock.html', indonesian_stocks=indonesian_stocks, us_stocks=us_stocks, username=username, end_date=dates)
     return redirect(url_for('login'))
 
 @app.route('/stockdata')
