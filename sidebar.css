@@ -1,0 +1,42 @@
+#sidebarMenu .position-sticky {
+    position: relative;
+    height: 100vh; /* Ensure the sidebar takes the full height of the viewport */
+  }
+  
+  .footer-dropdown {
+    position: absolute;
+    bottom: 20px; /* Adjust this value to add space from the bottom */
+    width: 100%; /* Ensure it spans the full width of the sidebar */
+  }
+  
+  .bg-dark {
+    background-color: #343a40 !important;
+  }
+  
+  .nav-link {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  
+  .nav-link.active {
+    color: #007bff;
+    background-color: #343a40;
+  }
+  
+  .nav-link:hover {
+    color: #ffffff;
+  }
+  
+  .dropdown-toggle {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  
+  .dropdown-menu-dark {
+    background-color: #343a40;
+    color: rgba(255, 255, 255, 0.75);
+  }
+  
+  .dropdown-item:hover {
+    background-color: #007bff;
+    color: #ffffff;
+  }
+  

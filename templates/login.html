@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login</title>
+	<title>Login InvestE</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -15,7 +15,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/animate/animate.css') }}">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-5.1.3/dist/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/css-hamburgers/hamburgers.min.css') }}">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/animsition/css/animsition.min.css') }}">
 <!--===============================================================================================-->
@@ -24,104 +24,47 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/daterangepicker/daterangepicker.css') }}">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/util.css') }}">
-	<link href="{{ url_for('static', filename='login.css') }}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
 <!--===============================================================================================-->
-
-<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
-
 </head>
-<body>
-
+<body style="background-color: #666666;">
+	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				
-					<div class="login-header">
-						Masuk ke InvestE
-					</div>
-<<<<<<< HEAD
-					<form method="post" action="{{ url_for('login') }}" class="needs-validation" novalidate>
-						{{ form.csrf_token }}
-						<div class="form-group">
-							{{ form.email.label(class="form-label") }}
-							{{ form.email(class="form-control", placeholder="Enter email") }}
-							{% for error in form.email.errors %}
-								<div class="text-danger">{{ error }}</div>
-							{% endfor %}
-						</div>
-						<div class="form-group">
-							{{ form.password.label(class="form-label") }}
-							{{ form.password(class="form-control", placeholder="Enter password") }}
-							{% for error in form.password.errors %}
-								<div class="text-danger">{{ error }}</div>
-							{% endfor %}
-						</div>
-						<button type="submit" class="btn btn-primary">Login</button>
-					</form>
-					<a href="/register">sign up</a>
 					
-=======
+				<form class="login100-form validate-form " method="post" action="{{ url_for('login') }}" class="needs-validation" novalidate>
+					<div class="text-center" >
+						<h3>Login Ke InvestE</h3>
+					</div>
+					<br>
+					{{ form.csrf_token }}
+					<div class="form-group">
+						{{ form.email.label(class="form-label") }}
+						{{ form.email(class="form-control", placeholder="Enter email") }}
+						{% for error in form.email.errors %}
+							<div class="text-danger">{{ error }}</div>
+						{% endfor %}
+					</div>
+					<div class="form-group">
+						{{ form.password.label(class="form-label") }}
+						{{ form.password(class="form-control", placeholder="Enter password") }}
+						{% for error in form.password.errors %}
+							<div class="text-danger">{{ error }}</div>
+						{% endfor %}
+					</div>
+					<a href="/register">Belum punya akun ?</a><br>
+					<a href="/register">Lupa password ?</a>
+					<div class="text-center">
+					<button type="submit" class="btn btn-primary">Login</button>
+					</div>
+	
 					
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input-email" type="text" name="email" placeholder="E-mail">
-						<span class="focus-input100"></span>
-					</div>
-					
-					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input-password" type="password" name="pass" placeholder="Password">
-						<span class="focus-input100"></span>
-					</div>
-
-					<div class="forgot_pass">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Ingat saya
-							</label>
-						</div>
-
-						<div>
-							<a href="#" class="txt1">
-								Lupa Password?
-							</a>
-						</div>
-					</div>
-			
-
-					<div class="container-login100-form-btn">
-						<button class="login-btn">
-							Masuk
-						</button>
-					</div>
-
-					<div class="text-center p-t-46 p-b-20">
-						<span class="txt2">
-							Belum punya akun?
-						</span>
-						<br>
-						<a href="#" class="txt1">
-							Daftar di sini!
-						</a>
-					</div>
-
-					<div>
-
-					</div>
-
-					<!-- <div class="login100-form-social flex-c-m">
-						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-							<i class="fa fa-facebook-f" aria-hidden="true"></i>
-						</a>
-
-						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-							<i class="fa fa-twitter" aria-hidden="true"></i>
-						</a>
-					</div> -->
 				</form>
->>>>>>> 2c4cbbad79632224274c33848c69be2a8a40d39d
 
-				<!-- <div class="login100-more" style="background-image: url('images/bg-01.jpg'{{ url_for('static', filename='images/bg-01.jpg') }});"> -->
+				
+
+				<div class="login100-more" style="background-image: url('{{ url_for('static', filename='2.jpg') }}');">
 				</div>
 			</div>
 		</div>
@@ -149,4 +92,4 @@
 	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
 </body>
-</html> 
+</html>

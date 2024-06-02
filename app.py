@@ -138,7 +138,8 @@ def home():
             if stock_data is None or stock_data.empty:
                 flash('Error loading stock data. Please try again.', 'danger')
                 return redirect(url_for("home"))
-            return redirect(url_for("home"))
+            username = session['username']
+            return redirect(url_for("home",username = username))
         else:
             selected_ticker = request.args.get('selected_ticker')
             return render_template('index.html', form=form,watchlist=selected_ticker, indonesian_stocks=indonesian_stocks)
@@ -221,7 +222,8 @@ def proses_register():
 @csrf.exempt  # Exempt CSRF token for this route
 def stock():
     if 'loggedin' in session:
-        return render_template('List-Stock.html', indonesian_stocks=indonesian_stocks, us_stocks=us_stocks)
+        username = session['username']
+        return render_template('List-Stock.html', indonesian_stocks=indonesian_stocks, us_stocks=us_stocks, username=username)
     return redirect(url_for('login'))
 
 @app.route('/stockdata')
@@ -281,7 +283,8 @@ def get_data():
 @csrf.exempt  # Exempt CSRF token for this route
 def index():
     if 'loggedin' in session:
-        return render_template('AI.html', IDstocks=indonesian_stocks)
+        username = session['username']
+        return render_template('AI.html', IDstocks=indonesian_stocks, username=username)
     return redirect(url_for('login'))
 
 @app.route('/predict')
