@@ -36,7 +36,7 @@
         data_us.forEach((stock, index) => {
             tableContentUs += `
             <tr>
-            <td>${stock.dates}</td>
+                <td>${stock.dates}</td>
                 <td>${stock.emiten}</td>
                 <td>${stock.close}</td>
                 <td>${stock.volume}</td>

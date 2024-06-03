@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, jsonify, request, redirect, url_for, session, flash
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -222,7 +221,7 @@ def proses_register():
 @csrf.exempt  # Exempt CSRF token for this route
 def stock():
     if 'loggedin' in session:
-        dates = end_date.index.strftime('%Y-%m-%d')
+        dates = end_date
         username = session['username']
         return render_template('List-Stock.html', indonesian_stocks=indonesian_stocks, us_stocks=us_stocks, username=username, end_date=dates)
     return redirect(url_for('login'))
@@ -242,6 +241,7 @@ def stock_data():
                 close_price = int(hist['Close'].iloc[0])  
                 volume = int(hist['Volume'].iloc[0])     
                 data_indo.append({
+                    "dates": hist.index.strftime('%Y-%m-%d').tolist(),
                     "emiten": emiten,
                     "close": close_price,
                     "volume": volume
@@ -254,6 +254,7 @@ def stock_data():
                 close_price = int(hist['Close'].iloc[0])  
                 volume = int(hist['Volume'].iloc[0])     
                 data_us.append({
+                    "dates": hist.index.strftime('%Y-%m-%d').tolist(),
                     "emiten": emiten,
                     "close": close_price,
                     "volume": volume
