@@ -19,6 +19,5 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Semua orang boleh menggunakan code nya untuk edukasi, untuk komersial silahkan hubungi salah satu kontributor
+* Inspirasi dari finance 
